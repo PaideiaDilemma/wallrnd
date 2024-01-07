@@ -1,7 +1,6 @@
 /target
 *.svg
 *.png
-Cargo.lock
 !docs/samples/*
 TODO
 .sass-cache
