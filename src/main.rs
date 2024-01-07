@@ -79,6 +79,13 @@ fn main() {
     }
     let mut cfg = MetaConfig::from_string(cfg_contents, verbose).pick_cfg(&mut rng, time, verbose);
 
+    if let Some(w) = args.width {
+        cfg.frame.w = w;
+    }
+    if let Some(h) = args.height {
+        cfg.frame.h = h;
+    }
+
     if verbose.prog {
         println!("Building scene");
     }
@@ -218,6 +225,8 @@ struct Args {
     image: String,
     config: String,
     init: String,
+    width: Option<usize>,
+    height: Option<usize>,
 }
 
 fn read_command_line_arguments() -> Args {
@@ -285,6 +294,26 @@ A: All"))[..]),
             }
             Some("--set") => args.set = true,
             Some("--nice") => args.nice = true,
+            Some("--width") => {
+                args.width = Some(
+                    it.next()
+                        .unwrap_or_else(|| {
+                            panic!("Option --width should be followed by a positive integer")
+                        })
+                        .parse()
+                        .unwrap_or_else(|e| panic!("Failed to parse width: {}", e)),
+                )
+            }
+            Some("--height") => {
+                args.width = Some(
+                    it.next()
+                        .unwrap_or_else(|| {
+                            panic!("Option --width should be followed by a positive integer")
+                        })
+                        .parse()
+                        .unwrap_or_else(|e| panic!("Failed to parse width: {}", e)),
+                )
+            }
             Some(o) => panic!("Unknown option {}", o),
         }
     }

@@ -3,7 +3,7 @@ WALLRND
 NAME
     wallrnd
       github.com/Vanille-N/wallrnd
-      crates.io/crates/wallrnd
+      github.com/PaideiaDilemma/wallrnd
 
 SYNOPSIS
     wallrnd [OPTIONS]
@@ -12,15 +12,17 @@ DESCRIPTION
     wallrnd - A highly configurable generator of abstract random wallpapers
 
 OPTIONS
-    --help         Print this help and exit
-    --log F        Save generation information for image replication in file F
+    --help         Print this help and exit.
+    --log F        Save generation information for image replication in file F.
     --verbose V    Display more debug information. See verbosity description below.
-    --time T       Generate image as if the current time was T (format HHMM)
+    --time T       Generate image as if the current time was T. (format HHMM)
     --image I      Destination of the generated file. If absent or invalid, program aborts. Not necessarily absolute path.
     --config C     Location of the config file. If absent or invalid, default parameters are used.
     --init C       Create a default configuration in file C and exit.
     --set          Set as wallpaper (requires image to be saved). Absolute path recommended for --image.
-    --nice         Lower process priority to run in the background (recommended)
+    --nice         Lower process priority to run in the background (recommended).
+    --width        The width of the generated svg (same as the config option).
+    --height       The height of the generated svg (same as the config option).
 
 EXAMPLES
     wallrnd --image /tmp/random-wallpaper.svg --config ~/.config/wallrnd.toml --set --nice
