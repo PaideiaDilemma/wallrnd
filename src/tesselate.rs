@@ -64,8 +64,8 @@ pub fn tile_hybrid_hexagons_triangles(f: &Frame, size: f64, rot: isize) -> Vec<(
     let adjust = Pos::polar(rot + 30, size / radians(30).cos());
     let m = [
         Movable::hexagon(size, rot),
-        Movable::triangle(size * radians(30).sin(), rot + 30),
-        Movable::triangle(size * radians(30).sin(), rot + 90),
+        Movable::triangle(size * radians(30).tan(), rot + 30),
+        Movable::triangle(size * radians(30).tan(), rot + 90),
     ];
     periodic_grid_tiling(
         f,
