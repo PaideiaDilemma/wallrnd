@@ -305,7 +305,7 @@ A: All"))[..]),
                 )
             }
             Some("--height") => {
-                args.width = Some(
+                args.height = Some(
                     it.next()
                         .unwrap_or_else(|| {
                             panic!("Option --width should be followed by a positive integer")
