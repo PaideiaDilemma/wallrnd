@@ -76,7 +76,7 @@ impl SceneCfg {
         }
     }
 
-    /// Math tiling to function that generates it
+    /// Match tiling to function that generates it
     pub fn make_tiling(&self, rng: &mut ThreadRng) -> Vec<(Pos, Path)> {
         match self.tiling {
             Tiling::Hexagons => tile_hexagons(&self.frame, self.size_tiling, rng.gen_range(0, 360)),

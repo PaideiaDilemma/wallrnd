@@ -876,7 +876,14 @@ fn choose_theme_shapes(
                     .unwrap_or(&&String::from("2400"))
                     .parse::<usize>()
                     .unwrap_or(2400);
+
                 if start <= time && time <= end {
+                    valid.push(e, e.distance.unwrap_or(BASE_WEIGHT));
+                }
+                // Allow start time to be greater then end time.
+                // That way we can check if time is within 1800-0600 directly.
+                // Otherwise you would need to specify 1800-2400 and 0000-0600
+                else if start > end && (start <= time || time <= end) {
                     valid.push(e, e.distance.unwrap_or(BASE_WEIGHT));
                 }
             }
