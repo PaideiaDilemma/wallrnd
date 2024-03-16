@@ -1,6 +1,7 @@
 use chrono::{Local, Timelike};
 use std::env;
 use std::fs::File;
+use std::fs::rename;
 use std::io::prelude::*;
 use std::process::exit;
 use wallrnd::deserializer::MetaConfig;
@@ -139,7 +140,9 @@ fn main() {
     if verbose.prog {
         println!("Writing image to file");
     }
-    document.save(&(dest.clone() + ".tmp")).unwrap_or_else(|e| {
+
+    let tmp_dest = dest.clone() + ".tmp";
+    document.save(&(tmp_dest)).unwrap_or_else(|e| {
         if verbose.warn {
             println!("An error occured: {:?}", e);
         }
@@ -147,16 +150,12 @@ fn main() {
     });
     #[allow(clippy::redundant_clone)]
     // Reason: clone is NOT redundant when certain feature flags are used...
-    std::process::Command::new("mv")
-        .arg(format!("{}.tmp", &dest))
-        .arg(dest.clone())
-        .status()
-        .unwrap_or_else(|e| {
-            if verbose.warn {
-                println!("An error occured: {}", e);
-            }
-            exit(1);
-        });
+    rename(tmp_dest, dest.clone()).unwrap_or_else(|e| {
+        if verbose.warn {
+            println!("An error occured: {:?}", e);
+        }
+        exit(1);
+    });
     if args.set {
         #[cfg(feature = "set-wallpaper")]
         {
